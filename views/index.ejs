@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <!-- to link css -->
+    <!-- not need to write /public/ejs bcz public folder bydefault servs files to ejs -->
+    <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+    <h1>SID BLOGS</h1>
+    <!-- loop to add all posts -->
+    <% for(post of posts) { %>
+        <div class="post">
+            <h3 class="user">@ <%= post.username %></h3>
+             <h4 class="content"><%= post.content %></h4> 
+        <!-- to see post in detail -->
+         
+        <br>
+        <!-- this req will be sent to posts/id which is handled in index.js -->
+        <a href="http://localhost:8080/posts/<%=post.id%>">see more</a><br><br>
+        <a href="http://localhost:8080/posts/<%=post.id%>/edit">edit post</a>
+           <br>
+           <!-- we are sending delete req so we r using button inside form -->
+           <form method="post" action="/posts/<%=post.id%>?_method=DELETE">
+            <button>delete post</button>
+        </form>
+        
+    </div>
+
+    <% } %>
+    <br><br>
+    <a href="http://localhost:8080/posts/new">create new post</a>
+</body>
+</html>
